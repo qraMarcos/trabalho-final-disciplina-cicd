@@ -1,0 +1,24 @@
+{
+  "name": "trabalho-final-da-disciplina-programacaoparaautomacaodetestes",
+  "version": "1.0.0",
+  "description": "Case de teste utilizando uma classe em javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qraMarcos/trabalho-final-da-disciplina-ProgramacaoParaAutomacaoDeTestes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/qraMarcos/trabalho-final-da-disciplina-ProgramacaoParaAutomacaoDeTestes/issues"
+  },
+  "homepage": "https://github.com/qraMarcos/trabalho-final-da-disciplina-ProgramacaoParaAutomacaoDeTestes#readme",
+  "dependencies": {
+    "mocha": "^11.7.5"
+  }
+}
