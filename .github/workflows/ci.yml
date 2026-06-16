@@ -1,5 +1,4 @@
-name: CI Pipeline
-
+name: Trabalho Final - CI/CD com GitHub Actions
 on:
   push:
     branches:
@@ -22,6 +21,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: 'npm'
 
       - name: Instalar dependências
         run: npm install
