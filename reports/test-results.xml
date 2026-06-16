@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="0.003" tests="5" failures="0">
+  <testsuite name="Root Suite" timestamp="2026-06-16T00:50:02" tests="0" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Classe de Serviço de Pagamento" timestamp="2026-06-16T00:50:02" tests="5" file="D:\__QA\_Pos-graduacao_em_Automacao_de_Testes_de_Software_ PGATS-2026-03\4_Integracao_Continua_Para_Automacao_de_Testes\projects\trabalho-final-disciplina-cicd\test\servicoDePagamento.test.js" time="0.002" failures="0">
+    <testcase name="Classe de Serviço de Pagamento Validar que o pagamento é adicionado com categoria &quot;cara&quot; " time="0.001" classname="Validar que o pagamento é adicionado com categoria &quot;cara&quot; ">
+    </testcase>
+    <testcase name="Classe de Serviço de Pagamento Validar que o pagamento é adicionado com categoria &quot;padrão&quot;" time="0.000" classname="Validar que o pagamento é adicionado com categoria &quot;padrão&quot;">
+    </testcase>
+    <testcase name="Classe de Serviço de Pagamento Validar que retorna apenas o último pagamento realizado" time="0.000" classname="Validar que retorna apenas o último pagamento realizado">
+    </testcase>
+    <testcase name="Classe de Serviço de Pagamento Validar que lança erro quando o valor do pagamento for igual a zero" time="0.001" classname="Validar que lança erro quando o valor do pagamento for igual a zero">
+    </testcase>
+    <testcase name="Classe de Serviço de Pagamento Validar que lança erro quando o valor do pagamento for menor ou igual a zero" time="0.000" classname="Validar que lança erro quando o valor do pagamento for menor ou igual a zero">
+    </testcase>
+  </testsuite>
+</testsuites>

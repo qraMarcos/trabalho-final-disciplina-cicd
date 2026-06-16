@@ -1,24 +1,34 @@
 {
-  "name": "trabalho-final-da-disciplina-programacaoparaautomacaodetestes",
+  "name": "trabalho-final-disciplina-cicd",
   "version": "1.0.0",
-  "description": "Case de teste utilizando uma classe em javascript",
+  "description": "Trabalho final da disciplina de Integração Contínua para Automação de Testes utilizando GitHub Actions",
   "main": "index.js",
   "scripts": {
-      "test": "mocha"
+    "test": "mocha",
+    "test:junit": "mocha --reporter mocha-junit-reporter --reporter-options mochaFile=reports/test-results.xml"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/qraMarcos/trabalho-final-da-disciplina-ProgramacaoParaAutomacaoDeTestes.git"
+    "url": "git+https://github.com/qraMarcos/trabalho-final-disciplina-cicd.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "ci",
+    "cd",
+    "github-actions",
+    "mocha",
+    "automacao-de-testes"
+  ],
+  "author": "Marcos",
   "license": "ISC",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/qraMarcos/trabalho-final-da-disciplina-ProgramacaoParaAutomacaoDeTestes/issues"
+    "url": "https://github.com/qraMarcos/trabalho-final-disciplina-cicd/issues"
   },
-  "homepage": "https://github.com/qraMarcos/trabalho-final-da-disciplina-ProgramacaoParaAutomacaoDeTestes#readme",
+  "homepage": "https://github.com/qraMarcos/trabalho-final-disciplina-cicd#readme",
   "dependencies": {
     "mocha": "^11.7.5"
+  },
+  "devDependencies": {
+    "mocha-junit-reporter": "^2.2.1"
   }
 }

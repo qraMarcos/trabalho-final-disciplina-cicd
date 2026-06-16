@@ -1,0 +1,39 @@
+name: Trabalho Final - CI/CD com GitHub Actions
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+  schedule:
+    - cron: '0 11 * * *'
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Executar testes e gerar relatório JUnit
+        run: |
+          mkdir -p reports
+          npm run test:junit
+
+      - name: Publicar relatório JUnit
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-junit
+          path: reports/test-results.xml
