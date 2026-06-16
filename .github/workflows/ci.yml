@@ -12,20 +12,30 @@ on:
 
 jobs:
   tests:
-
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout do código
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      - name: Install Dependencies
+      - name: Instalar dependências
         run: npm install
 
-      - name: Run Tests
+      - name: Executar testes
         run: npm test
+
+      - name: Gerar relatório
+        run: |
+          mkdir reports
+          echo "Execução realizada com sucesso em $(date)" > reports/resultado.txt
+
+      - name: Publicar relatório
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-testes
+          path: reports
