@@ -1,4 +1,5 @@
 name: Trabalho Final - CI/CD com GitHub Actions
+
 on:
   push:
     branches:
@@ -21,21 +22,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'npm'
+          cache: npm
 
       - name: Instalar dependências
         run: npm install
 
-      - name: Executar testes
-        run: npm test
-
-      - name: Gerar relatório
+      - name: Executar testes e gerar relatório JUnit
         run: |
-          mkdir reports
-          echo "Execução realizada com sucesso em $(date)" > reports/resultado.txt
+          mkdir -p reports
+          npm run test:junit
 
-      - name: Publicar relatório
+      - name: Publicar relatório JUnit
         uses: actions/upload-artifact@v4
         with:
-          name: relatorio-testes
-          path: reports
+          name: relatorio-junit
+          path: reports/test-results.xml
