@@ -4,7 +4,7 @@
 
 Este trabalho tem como objetivo aplicar os conceitos de Integração Contínua (CI) utilizando GitHub Actions em um projeto com testes automatizados.
 
-Para o desenvolvimento da atividade foi reutilizado um projeto criado anteriormente na disciplina de Programação para Automação de Testes, contendo uma classe de serviço de pagamento e testes automatizados implementados com o framework Mocha.
+Para a realização da atividade, foi reutilizado um projeto desenvolvido anteriormente na disciplina de Programação para Automação de Testes. O projeto contém uma classe responsável pelo gerenciamento de pagamentos e uma suíte de testes automatizados implementada com o framework Mocha.
 
 ---
 
@@ -30,19 +30,16 @@ test/
 
 .github/
  └── workflows/
-     └── pipeline-ci.yml
-
-reports/
- └── test-results.xml
+     └── trabalho-final-cicd.yml
 ```
 
 ---
 
 ## Pipeline de Integração Contínua
 
-A pipeline foi implementada utilizando GitHub Actions e possui três formas de execução:
+A pipeline foi implementada utilizando GitHub Actions e possui três formas de execução, conforme solicitado na atividade.
 
-### Execução por Push
+### 1. Execução por Push
 
 A pipeline é executada automaticamente sempre que ocorre um push para a branch principal (`main`).
 
@@ -52,43 +49,77 @@ push:
     - main
 ```
 
-### Execução Manual
+### 2. Execução Manual
 
-A execução manual foi implementada utilizando o gatilho `workflow_dispatch`, permitindo que a pipeline seja iniciada diretamente pela interface do GitHub.
+Também é possível executar a pipeline manualmente através da aba **Actions** do GitHub utilizando o gatilho `workflow_dispatch`.
 
 ```yaml
 workflow_dispatch:
 ```
 
-### Execução Agendada
+### 3. Execução Agendada
 
-A pipeline também possui execução automática diária através do recurso de agendamento (`schedule`).
+Também foi configurada uma execução automática diária utilizando o recurso `schedule` do GitHub Actions.
+
+A expressão cron utilizada foi:
 
 ```yaml
 schedule:
   - cron: '0 11 * * *'
 ```
 
+Essa configuração executa a pipeline todos os dias às **11:00 UTC**, que corresponde a **08:00 no horário de Brasília (UTC-3)**.
+
+O objetivo desse tipo de execução é validar periodicamente o projeto mesmo quando não há novas alterações enviadas ao repositório.
+
 ---
 
-## Fluxo da Pipeline
+## Fluxo de Execução da Pipeline
 
-A execução da pipeline segue as seguintes etapas:
+A pipeline executa as seguintes etapas:
 
-1. Checkout do código-fonte.
-2. Configuração do ambiente Node.js.
-3. Instalação das dependências do projeto.
-4. Execução dos testes automatizados.
-5. Geração do relatório de testes no formato JUnit XML.
-6. Publicação do relatório como Artifact da execução.
+1. Realiza o checkout do código-fonte.
+2. Configura o ambiente Node.js.
+3. Instala as dependências do projeto.
+4. Executa os testes automatizados e gera um relatório de testes no formato JUnit XML.
+5. Publica o relatório como Artifact da execução.
+
+---
+
+## Testes Automatizados
+
+Os testes foram implementados utilizando o framework Mocha.
+
+Atualmente a suíte de testes possui os seguintes cenários:
+
+* Validar que o pagamento é adicionado com categoria "cara";
+* Validar que o pagamento é adicionado com categoria "padrão";
+* Validar que retorna apenas o último pagamento realizado;
+* Validar que lança erro quando o valor do pagamento for igual a zero;
+* Validar que lança erro quando o valor do pagamento for menor ou igual a zero.
+
+Resultado obtido:
+
+```text
+5 testes executados
+0 falhas
+```
+
+Todos os testes foram executados com sucesso tanto localmente quanto no ambiente do GitHub Actions.
 
 ---
 
 ## Relatório de Testes
 
-Para atender ao requisito de geração e armazenamento de relatórios, foi utilizado o pacote `mocha-junit-reporter`.
+Para geração do relatório foi utilizado o pacote:
 
-A execução dos testes gera automaticamente o arquivo:
+```text
+mocha-junit-reporter
+```
+
+O relatório é gerado no formato JUnit XML, amplamente utilizado em pipelines de Integração Contínua.
+
+Arquivo gerado:
 
 ```text
 reports/test-results.xml
@@ -99,22 +130,19 @@ O relatório contém informações como:
 * Quantidade de testes executados;
 * Quantidade de falhas;
 * Tempo de execução;
-* Nome dos casos de teste executados.
+* Casos de teste executados.
 
-Exemplo de resultado obtido:
+Exemplo de resultado:
 
-```text
-Tests: 5
-Failures: 0
+```xml
+<testsuites tests="5" failures="0">
 ```
 
 ---
 
-## Armazenamento do Relatório
+## Publicação do Relatório
 
-Após a execução dos testes, o relatório é publicado como Artifact da pipeline utilizando a Action `upload-artifact`.
-
-Dessa forma, o relatório pode ser baixado diretamente pela interface do GitHub Actions para consulta posterior.
+Após a execução dos testes, o relatório é publicado na própria execução da pipeline através do recurso de Artifacts do GitHub Actions.
 
 Artifact gerado:
 
@@ -122,23 +150,25 @@ Artifact gerado:
 relatorio-junit
 ```
 
+Dessa forma, o relatório pode ser baixado e consultado posteriormente diretamente pela interface do GitHub.
+
 ---
 
-## Execução Local
+## Como Executar Localmente
 
-Instalar as dependências:
+### Instalar as dependências
 
 ```bash
 npm install
 ```
 
-Executar os testes:
+### Executar os testes
 
 ```bash
 npm test
 ```
 
-Gerar relatório JUnit XML:
+### Gerar o relatório JUnit XML
 
 ```bash
 npm run test:junit
@@ -146,27 +176,27 @@ npm run test:junit
 
 ---
 
-## Resultados Obtidos
+## Evidências da Execução
 
-Todos os testes automatizados foram executados com sucesso tanto localmente quanto através da pipeline do GitHub Actions.
+As evidências da atividade podem ser visualizadas na aba **Actions** do repositório GitHub, contendo:
 
-Resultado da execução:
+* Execução bem-sucedida da pipeline;
+* Execução dos testes automatizados;
+* Geração do relatório JUnit XML;
+* Publicação do Artifact `relatorio-junit`.
 
-```text
-5 testes executados
-0 falhas
-```
+---
 
-A pipeline foi executada com sucesso através dos três mecanismos solicitados na atividade:
+## Repositório
 
-* Push;
-* Execução manual;
-* Agendamento.
+O código-fonte e a pipeline desenvolvidos para esta atividade estão disponíveis em:
+
+https://github.com/qraMarcos/trabalho-final-disciplina-cicd
 
 ---
 
 ## Conclusão
 
-A atividade permitiu aplicar na prática os conceitos de Integração Contínua utilizando GitHub Actions, automatizando a execução dos testes e a geração de relatórios.
+Com a implementação desta solução foi possível aplicar na prática os conceitos de Integração Contínua estudados na disciplina.
 
-Com a solução implementada, qualquer alteração enviada para o repositório pode ser validada automaticamente, contribuindo para a qualidade e confiabilidade do software.
+A utilização do GitHub Actions permitiu automatizar a execução dos testes, disponibilizar relatórios de execução e garantir que alterações enviadas ao repositório sejam validadas automaticamente, contribuindo para a qualidade e confiabilidade do software.
